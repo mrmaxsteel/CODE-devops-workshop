@@ -4,10 +4,12 @@ This workshop will be a mixture of interactive learning and hands-on practical w
 *	Run a Jenkins Continuous Integration (CI) server as a Docker container on an AWS instance
 *	Set up a CI/CD pipeline for a GitHub repository, so you can have automated Build, Test and Deploy, each time you commit!
 
-You will come away knowing more about public clouds and why there are being used more and more over on-premise Virtual Data Centres (VDCs). You will have a better understanding of Continuous Integration/Continuous Deployment (CI/CD), and how it can really help speed up time to market and improve software quality. And you will leave knowing everything you need to know to set up Continuous Integration on your next software project so you can hit the ground running! 
+You will come away knowing more about public clouds and why they are being used more and more in industry. You will be introduced to containers, and learn a bit about why they are the hottest topic in tech at the moment. And you will have a better understanding of Continuous Integration/Continuous Deployment (CI/CD), and how it can really help accelerate time to market and improve software quality. 
+
+Finally, and perhaps most practically, you will leave knowing everything you need to know to easily set up your own end-to-end DevOps pipeline, so you can hit the ground running on your next software project! 
 
 ## Pre-work
-### What you will need
+What you will need:
 * A laptop with:
    * Git installed (www.git-scm.com/downloads)
    * A text editor of your choice (e.g. VS Code)
