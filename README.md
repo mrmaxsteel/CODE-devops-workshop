@@ -1,4 +1,8 @@
-# devops-workshop
+# CODE DevOps Workshop
+In this workshop we will:
+ * Learn how to use AWS to launch and use compute resources in the Cloud
+ * Run a Jenkins Continuous Integration server as a Docker container in the Cloud
+ * Set up a CI Pipeline for a GitHub repository, so you can have automated Build, Test and Deploy, each time you commit!
 ## Pre-work
 ### What you will need
 * A laptop with:
@@ -36,7 +40,6 @@ docker container run \
    --name jenkins-max -d \
    maxsteel/jenkins-code:latest
 ```
-
 ## Other Stuff
 ### Pseudocode
 * Introduce App
