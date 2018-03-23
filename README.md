@@ -1,14 +1,19 @@
-# CODE DevOps Workshop
-In this workshop we will:
- * Learn how to use AWS to launch and use compute resources in the Cloud
- * Run a Jenkins Continuous Integration server as a Docker container in the Cloud
- * Set up a CI Pipeline for a GitHub repository, so you can have automated Build, Test and Deploy, each time you commit!
+## CODE DevOps Workshop: 
+# Clouds, Containers, CI/CD and You!
+This workshop will be a mixture of interactive learning and hands-on practical work, so come prepared to get your hands dirty! In this workshop we will:
+*	Use Amazon Web Services (AWS) to launch and use compute resources in the Cloud
+*	Run a Jenkins Continuous Integration (CI) server as a Docker container on an AWS instance
+*	Set up a CI/CD pipeline for a GitHub repository, so you can have automated Build, Test and Deploy, each time you commit!
+
+You will come away knowing more about public clouds and why there are being used more and more over on-premise Virtual Data Centres (VDCs). You will have a better understanding of Continuous Integration/Continuous Deployment (CI/CD), and how it can really help speed up time to market and improve software quality. And you will leave knowing everything you need to know to set up Continuous Integration on your next software project so you can hit the ground running! 
+
 ## Pre-work
 ### What you will need
 * A laptop with:
    * Git installed (www.git-scm.com/downloads)
    * A text editor of your choice (e.g. VS Code)
-* An active AWS Educate account
+* An active AWS Educate account (Winston can provide instructions to set this up)
+* A mind ready to be blown!
 
 ### Register your AWS Educate Account
 *Amazon Web Services (AWS) is a public cloud provider, that we will use to launch preconfigured instances for this workshop*
