@@ -1,5 +1,4 @@
-## CODE DevOps Workshop: 
-# Clouds, Containers, CI/CD and You!
+# CODE DevOps Workshop: Clouds, Containers, CI/CD and You!
 This workshop will be a mixture of interactive learning and hands-on practical work, so come prepared to get your hands dirty! In this workshop we will:
 *	Use Amazon Web Services (AWS) to launch and use compute resources in the Cloud
 *	Run a Jenkins Continuous Integration (CI) server as a Docker container on an AWS instance
@@ -12,7 +11,7 @@ You will come away knowing more about public clouds and why there are being used
 * A laptop with:
    * Git installed (www.git-scm.com/downloads)
    * A text editor of your choice (e.g. VS Code)
-* An active AWS Educate account (Winston can provide instructions to set this up)
+* An active AWS Educate account
 * A mind ready to be blown!
 
 ### Register your AWS Educate Account
