@@ -10,6 +10,7 @@ Finally, and perhaps most practically, you will leave knowing everything you nee
 
 ## Pre-work
 What you will need:
+* A personal GitHub account
 * A laptop with:
    * Git installed (www.git-scm.com/downloads)
    * A text editor of your choice (e.g. VS Code)
@@ -45,7 +46,33 @@ docker container run \
    --name jenkins -d \
    maxsteel/jenkins-code:latest
 ```
-
+### Step 4: Cofigure Security
+### Step 5: Configure WebHooks
+* Create a GitHub Personal Access Token: 
+  * Go to https://github.com/settings/tokens and 'Generate New Token'
+  * Call the token something like "Jenkins"
+  * Select the following scopes: repo, admin:repo_hook, user
+  * Click "Generate Token", copy the token and keep it safe
+* On the Jenkins UI > Credentials
+* Under Domains, click "(global)"
+* Add Crendential:
+  * Kind: Username with Password
+  * Scope: Global
+  * Username: <your GitHub username>
+  * Password: <PAToken generated above>
+  * ID: GITHUB_PATOKEN_USERPASS
+  * Description: GITHUB_PATOKEN_USERPASS
+* Add a second Crendential:
+  * Kind: Secret Text
+  * Scope: Global
+  * Secret: <PAToken generated above>
+  * ID: GITHUB_PATOKEN_SECRET
+  * Description: GITHUB_PATOKEN_SECRET
+* Go to Jenkins > Manage Jenkins > Configure System
+* Scroll down to GitHub, under GitHub Servers, select GITHUB_PATOKEN_SECRET from the Credentials drop-down
+* Check 'Manage Hooks'
+* Test Connection
+  
 ## Other Stuff
 ### Pseudocode
 * Introduce App
