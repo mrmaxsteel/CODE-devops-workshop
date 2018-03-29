@@ -72,6 +72,7 @@ docker container run \
 * Scroll down to GitHub, under GitHub Servers, select GITHUB_PATOKEN_SECRET from the Credentials drop-down
 * Check 'Manage Hooks'
 * Test Connection
+### Step 6: Set up a Multibranch Pipeline
   
 ## Other Stuff
 ### Pseudocode
