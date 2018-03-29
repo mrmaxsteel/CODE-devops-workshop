@@ -4,7 +4,7 @@ This workshop will be a mixture of interactive learning and hands-on practical w
 *	Run a Jenkins Continuous Integration (CI) server as a Docker container on an AWS instance
 *	Set up a CI/CD pipeline for a GitHub repository, so you can have automated Build, Test and Deploy, each time you commit!
 
-You will come away knowing more about public clouds and why they are being used more and more in industry. You will be introduced to containers, and learn a bit about why they are the hottest topic in tech at the moment. And you will have a better understanding of Continuous Integration/Continuous Deployment (CI/CD), and how it can really help accelerate time to market and improve software quality. 
+Hopefully, you will come away knowing more about public clouds and why they are being used more and more in industry. You will be introduced to containers, and learn a bit about why they are the hottest topic in tech at the moment. And you will have a better understanding of Continuous Integration/Continuous Deployment (CI/CD), and how it can really help accelerate time to market and improve software quality. 
 
 Finally, and perhaps most practically, you will leave knowing everything you need to know to easily set up your own end-to-end DevOps pipeline, so you can hit the ground running on your next software project! 
 
@@ -14,7 +14,6 @@ What you will need:
    * Git installed (www.git-scm.com/downloads)
    * A text editor of your choice (e.g. VS Code)
 * An active AWS Educate account
-* A mind ready to be blown!
 
 ### Register your AWS Educate Account
 *Amazon Web Services (AWS) is a public cloud provider, that we will use to launch preconfigured instances for this workshop*
@@ -26,11 +25,11 @@ What you will need:
 ### Step 1: Launch your preconfigured Docker Host
 * Log onto the AWS Console, go to Services > EC2
 * Select "Launch Instance"
-* Search for AMI id "<insert AMI ID here>", choose keypair called "devops-workshop" and security group called "devops-workshop"
+* Search for AMI id "ami-45c7593d", choose keypair called "devops-workshop" and security group called "devops-workshop"
 * Launch the instance, take note of the public DNS of the instance
 
 ### Step 2: Connect to the instance using SSH
-* Download the SSH key called code.pem from the dropbox @ <dropbox_link_here>
+* Download the SSH key called devops-workshop.pem
 * From a Git Bash, SSH to instance with:
 ```
 ssh ubuntu@<PUBLIC_DNS> -i /path/to/devops-workshop.pem
@@ -40,12 +39,13 @@ ssh ubuntu@<PUBLIC_DNS> -i /path/to/devops-workshop.pem
 * Run following:
 ```
 docker container run \
-   --mount type=volume,source=jenkins-max-data,destination="/var/jenkins_home",volume-driver=local \
+   --mount type=volume,source=jenkins-data,destination="/var/jenkins_home",volume-driver=local \
    -v /var/run/docker.sock:/var/run/docker.sock \
    -p 8080:8080 \
-   --name jenkins-max -d \
+   --name jenkins -d \
    maxsteel/jenkins-code:latest
 ```
+
 ## Other Stuff
 ### Pseudocode
 * Introduce App
@@ -64,7 +64,6 @@ docker container run \
 
 ### AMI config
 * Install docker-ce
-* set DOCKER_OPTS="--experimental=false" in /etc/default/docker
 * usermod -aG docker ubuntu
 
 ### AWS IAM Profile permissions
