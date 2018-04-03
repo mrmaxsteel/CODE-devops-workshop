@@ -25,9 +25,9 @@ pipeline {
     }
 
     stage ('Docker Build & Run') {
-      when {
-        branch 'master'
-      }
+      // when {
+      //   branch 'master'
+      // }
       steps {  
         sh 'docker container rm --force flask-calculator-app || true'
         sh 'docker build --rm -t flask-calculator-img .'
