@@ -6,5 +6,5 @@ RUN pip install --no-cache-dir -r requirements.txt
 WORKDIR /app/
 COPY app/ .
 # Set the Entrypoint to start the calculator app
-ENTRYPOINT ["python", "calculator/app.py"]
+CMD ["python", "calculator/app.py"]
 
