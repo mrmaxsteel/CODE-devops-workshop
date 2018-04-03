@@ -36,11 +36,7 @@ pipeline {
     }
 
     stage ('Docker Build & Run') {
-      agent { 
-        node {
-          label 'master' 
-        } 
-      }
+      agent { any }
       // when {
       //   branch 'master'
       // }
