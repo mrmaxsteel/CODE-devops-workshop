@@ -103,6 +103,7 @@ From the Jenkins Web UI:
   * Owner: \<Your GitHub Username\>
   * Repository: CODE-devops-workshop
   * Discovery Branches Strategy: All branches
+  * Leave 'Discover PRs from origin' and delete 'Discover PRs from forks' by pressing the red X
   * 'Add' > 'Filter by name (with wildcards)'. In the 'Include' field, enter: "master PR*"
 * Select 'Save'  
 ## Other Stuff
