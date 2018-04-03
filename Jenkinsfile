@@ -1,10 +1,6 @@
 pipeline {
 
-  agent { 
-    dockerfile {
-      additionalBuildArgs  '--target builder'
-    } 
-  }
+  agent { master }
 
   environment {
     IMAGE_ID = 'flask-calculator-img'
@@ -14,6 +10,12 @@ pipeline {
   stages {
 
     stage ('Run Unit Tests') {
+      agent { 
+        dockerfile {
+          additionalBuildArgs  '--target builder'
+          reuseNode true
+        } 
+      }
       steps {
         sh 'py.test flask-test-kata/tests/unit -v --junitprefix=linux --junitxml unit_results.xml || true'
       }
@@ -25,6 +27,12 @@ pipeline {
     }
 
     stage ('Run Integration Tests') {
+      agent { 
+        dockerfile {
+          additionalBuildArgs  '--target builder'
+          reuseNode true
+        } 
+      }
       steps {
         sh 'py.test flask-test-kata/tests/integration -v --junitprefix=linux --junitxml integration_results.xml || true'
       }
@@ -36,7 +44,6 @@ pipeline {
     }
 
     stage ('Docker Build & Run') {
-      agent { any }
       // when {
       //   branch 'master'
       // }
