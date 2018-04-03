@@ -22,16 +22,15 @@ pipeline {
       }
       post {
         always {
-        always {
-          junit '**/unit_results.xml'
+          junit '**/*_results.xml'
         }
       }
     }
 
     stage ('Docker Build & Run') {
-      // when {
-      //   branch 'master'
-      // }
+      when {
+        branch 'master'
+      }
       steps {  
         sh 'docker container rm --force flask-calculator-app || true'
         sh 'docker build --rm -t flask-calculator-img .'
