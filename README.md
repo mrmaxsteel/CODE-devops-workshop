@@ -20,20 +20,25 @@ What you will need:
 *Amazon Web Services (AWS) is a public cloud provider, that we will use to launch preconfigured instances for this workshop*
 * Visit https://www.awseducate.com/Registration and register your Student account.
 * Log in to AWS Educate account, click 'AWS Account' from the menu bar, click "Go to your AWS Educate starter account"
-* This will launch a new window, with the AWS console
+* This will launch a new window, Hit 'Start Lab' and 'Open Console', to open the AWS console
 
 ## Workshop
 ### Step 1: Launch your pre-configured Docker Host
 * Log onto the AWS Console, go to Services > EC2
-* Select "Launch Instance"
-* Search for AMI id "ami-45c7593d", choose keypair called "devops-workshop" and security group called "devops-workshop"
-* Launch the instance, take note of the public DNS of the instance
+* Select 'Launch Instance'
+* Under 'My AMIs', search for AMI id "ami-45c7593d" and select it
+* Choose t2.micro instance type, then 'Configure Instance Details'.
+* Accept the defaults for 'Configure Instance Details' and 'Add Storage'
+* Then, add a tag with Key="Name" and Value="devops-<your-initials>"
+* Check 'Select an existing security group', and choose "devops-workshop" (sg-feab4080) from the list, notice the 3 ports we have open
+* Click 'Review and Launch', and then 'Launch' 
+* Choose keypair called "devops-workshop" and then 'Launch Instances', taking note of the Public DNS Name of the instance
 
 ### Step 2: Connect to the instance using SSH
 * Download the SSH key called devops-workshop.pem
 * From a Git Bash, SSH to instance with:
 ```
-ssh ubuntu@<PUBLIC_DNS> -i /path/to/devops-workshop.pem
+ssh ubuntu@<PUBLIC_DNS_NAME> -i /path/to/devops-workshop.pem
 ```
 
 ### Step 3: Run a Jenkins CI container
@@ -46,7 +51,22 @@ docker container run \
    --name jenkins -d \
    maxsteel/jenkins-code:latest
 ```
+* Test that Jenkins has started by visiting http://<PUBLIC_DNS_NAME>:8080/
 ### Step 4: Configure Security
+From GitHub.com:
+* Click on your profile in the top right and select 'Settings'
+* Choose 'Developer Settings', then chose 'New OAuth App':
+  * Application: Jenkins-AWS
+  * Homepage URL: "http://<PUBLIC_DNS_NAME>:8080/"
+  * Authorization callback URL: "http://<PUBLIC_DNS_NAME>:8080/securityRealm/finishLogin"
+* Click 'Register Application', copy the 'Client ID' and 'Client Secret'
+From the Jenkins Web UI:
+* Choose Manage Jenkins > Configure Global Security. Check 'Enable Security'
+* Under 'Security Realm', Select 'GitHub Authentication Plugin'. Keep the defaults, but paste the Client ID and Client Secret you created above
+* Under 'Authorization', Select 'GitHub Committer Authorization Strategy':
+  * **IMPORTANT:** In the "Admin User Names" field, enter your GitHub user name. Be sure to get it exactly right!
+  * Check 'Use GitHub repository permissions'
+* Select 'Save'. This will refresh the window and try to reconnect to Jenkins using your GitHub Credentials. Select 'Authorize', and you should now be logged into Jenkins using your GitHub account!
 ### Step 5: Configure WebHooks
 * Create a GitHub Personal Access Token: 
   * Go to https://github.com/settings/tokens and 'Generate New Token'
@@ -69,11 +89,22 @@ docker container run \
   * ID: GITHUB_PATOKEN_SECRET
   * Description: GITHUB_PATOKEN_SECRET
 * Go to Jenkins > Manage Jenkins > Configure System
-* Scroll down to GitHub, under GitHub Servers, select GITHUB_PATOKEN_SECRET from the Credentials drop-down
+* Scroll down to GitHub, under GitHub Servers, choose 'Add GitHub Server':
+  * Under 'Name', enter "GitHub"
+  * Select GITHUB_PATOKEN_SECRET from the 'Credentials' drop-down
 * Check 'Manage Hooks'
-* Test Connection
+* 'Test Connection'. If successful, 'Save' the configuration
 ### Step 6: Set up a Multibranch Pipeline
-  
+* From GitHub, take a 'Fork' of this repository.
+* From the Jenkins UI, choose 'create new jobs' or 'New Item'
+* Pick a name, e.g. "CODE-devops-workshop", select 'Multibranch Pipeline', and press OK
+* Under Branch Sources, 'Add Source' > 'GitHub':
+  * Credentials: GITHUB_PATOKEN_USERPASS
+  * Owner: \<Your GitHub Username\>
+  * Repository: CODE-devops-workshop
+  * Discovery Branches Strategy: All branches
+  * 'Add' > 'Filter by name (with wildcards)'. In the 'Include' field, enter: "master PR*"
+* Select 'Save'  
 ## Other Stuff
 ### Pseudocode
 * Introduce App
