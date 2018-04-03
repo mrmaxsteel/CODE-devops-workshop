@@ -36,15 +36,19 @@ pipeline {
     }
 
     stage ('Docker Build & Run') {
-      agent { label 'master' }
+      agent { 
+        node {
+          label 'master' 
+        } 
+      }
       // when {
       //   branch 'master'
       // }
       steps {  
-        sh "sudo docker container rm --force ${env.CONTAINER_NAME} || true"
-        sh "sudo docker build --rm -t ${env.IMAGE_ID} ${env.IMAGE_ID}:latest"
-        sh "sudo docker tag ${env.IMAGE_ID} ."
-        sh "sudo docker container run --name ${env.CONTAINER_NAME} -p 5000:5000 ${env.IMAGE_ID}:latest"
+        sh "docker container rm --force ${env.CONTAINER_NAME} || true"
+        sh "docker build --rm -t ${env.IMAGE_ID} ${env.IMAGE_ID}:latest"
+        sh "docker tag ${env.IMAGE_ID} ."
+        sh "docker container run --name ${env.CONTAINER_NAME} -p 5000:5000 ${env.IMAGE_ID}:latest"
       }
     }
   }
