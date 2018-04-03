@@ -13,7 +13,6 @@ pipeline {
       agent { 
         dockerfile {
           additionalBuildArgs  '--target builder'
-          reuseNode true
         } 
       }
       steps {
@@ -29,7 +28,6 @@ pipeline {
     stage ('Run Integration Tests') {
       agent { 
         dockerfile {
-          additionalBuildArgs  '--target builder'
           reuseNode true
         } 
       }
@@ -49,7 +47,7 @@ pipeline {
       // }
       steps {  
         sh "docker container rm --force ${env.CONTAINER_NAME} || true"
-        sh "docker build --rm -t ${env.IMAGE_ID} ${env.IMAGE_ID}:latest"
+        sh "docker build --rm -t ${env.IMAGE_ID} ${env.IMAGE_ID}:latest ."
         sh "docker tag ${env.IMAGE_ID} ."
         sh "docker container run --name ${env.CONTAINER_NAME} -p 5000:5000 ${env.IMAGE_ID}:latest"
       }
