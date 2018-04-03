@@ -28,7 +28,7 @@ pipeline {
     stage ('Run Integration Tests') {
       agent { 
         dockerfile {
-          reuseNode true
+          additionalBuildArgs  '--target builder'
         } 
       }
       steps {
