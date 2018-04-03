@@ -7,4 +7,4 @@ class CalculatorTests(TestCase):
         pass
 
     def test_div(self):
-        pass
+        self.assertEquals("1", "30")
