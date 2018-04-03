@@ -25,18 +25,22 @@ pipeline {
     }
 
     stage ('Docker Build & Run') {
+      // Only run the application when on 'master' branch
       // when {
       //   branch 'master'
       // }
       steps {  
+        // Remove existing running container
         sh 'docker container rm --force flask-calculator-app || true'
+        // Rebuild the Docker image and tag it as 'latest'
         sh 'docker build --rm -t flask-calculator-img .'
         sh 'docker tag flask-calculator-img flask-calculator-img:latest'
+        // Run the new Docker image
         sh 'docker container run --name flask-calculator-app -p 5000:5000 -d flask-calculator-img:latest'
       }
       post {
         success {
-          echo 'The app can be tested by visiting: "http://`curl -s http://169.254.169.254/latest/meta-data/public-hostname`:5000"'
+          sh 'echo The app can be tested by visiting: "http://`curl -s http://169.254.169.254/latest/meta-data/public-hostname`:5000"'
         }
       }
     }
