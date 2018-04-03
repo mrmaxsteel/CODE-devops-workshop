@@ -1,6 +1,6 @@
 pipeline {
 
-  agent { master }
+  agent { label 'master' }
 
   environment {
     IMAGE_ID = 'flask-calculator-img'
