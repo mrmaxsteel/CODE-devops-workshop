@@ -40,7 +40,7 @@ pipeline {
       }
       post {
         success {
-          sh 'echo The app can be tested by visiting: "http://`curl -s http://169.254.169.254/latest/meta-data/public-hostname`:5000"'
+          sh "echo The app can be tested by visiting: http://`curl -s http://169.254.169.254/latest/meta-data/public-hostname`:5000"
         }
       }
     }
