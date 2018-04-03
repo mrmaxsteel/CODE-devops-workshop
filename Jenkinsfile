@@ -10,11 +10,11 @@ pipeline {
       }
     }
 
-    // stage ('Run Integration Tests') {
-    //   steps {
-    //     sh 'py.test tests/unit -v'
-    //   }
-    // }
+    stage ('Run Integration Tests') {
+      steps {
+        sh 'py.test flask-test-kata/tests/integration -v'
+      }
+    }
 
     // stage ('Docker Build') {
     //   agent { master }
