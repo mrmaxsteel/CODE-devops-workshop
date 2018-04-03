@@ -6,7 +6,7 @@ pipeline {
 
     stage ('Run Unit Tests') {
       steps {
-        sh 'py.test flask-test-kata/tests/unit -v --junitprefix=linux --junitxml unit_results.xml || true'
+        sh 'py.test flask-test-kata/tests/unit -v --junitprefix=linux --junitxml unit_results.xml'
       }
       post {
         always {
@@ -17,13 +17,13 @@ pipeline {
 
     stage ('Run Integration Tests') {
       steps {
-        sh 'py.test flask-test-kata/tests/integration -v --junitprefix=linux --junitxml integration_results.xml || true'
+        sh 'py.test flask-test-kata/tests/integration -v --junitprefix=linux --junitxml integration_results.xml'
       }
-      post {
-        always {
-          //junit '**/integration_results.xml'
-        }
-      }
+      // post {
+      //   always {
+      //     junit '**/integration_results.xml'
+      //   }
+      // }
     }
 
     // stage ('Docker Build') {
