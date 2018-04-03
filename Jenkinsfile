@@ -21,7 +21,7 @@ pipeline {
       }
       post {
         always {
-          junit '**/integration_results.xml'
+          //junit '**/integration_results.xml'
         }
       }
     }
