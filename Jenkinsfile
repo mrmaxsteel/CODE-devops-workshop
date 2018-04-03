@@ -19,11 +19,11 @@ pipeline {
       steps {
         sh 'py.test flask-test-kata/tests/integration -v --junitprefix=linux --junitxml integration_results.xml'
       }
-      // post {
-      //   always {
-      //     junit '**/integration_results.xml'
-      //   }
-      // }
+      post {
+        always {
+          junit '**/integration_results.xml'
+        }
+      }
     }
 
     // stage ('Docker Build') {
