@@ -1,23 +1,22 @@
 pipeline {
-
+  // Run this pipeline on the Jenkins Master (unless otherwise specified)
   agent { label 'master' }
-
-  environment {
-    IMAGE_ID = 'flask-calculator-img'
-    CONTAINER_NAME = 'flask-calculator-app'
-  }
 
   stages {
 
     stage ('Run Unit & Integration Tests') {
+      // For this stage, tell Jenkins to build the agent form the dockerfile
       agent { 
         dockerfile true
       }
       steps {
-        sh 'py.test flask-test-kata/tests/unit -v --junitprefix=linux --junitxml unit_results.xml || true'
-        sh 'py.test flask-test-kata/tests/integration -v --junitprefix=linux --junitxml integration_results.xml || true'
+        // Run the Unit Tests
+        sh 'py.test app/tests/unit -v --junitprefix=linux --junitxml unit_results.xml || true'
+        // Run the Integration Tests
+        sh 'py.test app/tests/integration -v --junitprefix=linux --junitxml integration_results.xml || true'
       }
       post {
+        // Parse the test results so they appear in BlueOcean UI
         always {
           junit '**/*_results.xml'
         }
@@ -25,17 +24,18 @@ pipeline {
     }
 
     stage ('Docker Build & Run') {
-      // Only run the application when on 'master' branch
-      // when {
-      //   branch 'master'
-      // }
+      // Since no agent{} is specified, this stage will run on the Jenkins Master
+      when {
+        // Only run the application when on 'master' branch
+        branch 'master'
+      }
       steps {  
-        // Remove existing running container
+        // Remove any existing running containers
         sh 'docker container rm --force flask-calculator-app || true'
-        // Rebuild the Docker image and tag it as 'latest'
+        // Re-build the Docker Image and tag it as 'latest'
         sh 'docker build --rm -t flask-calculator-img .'
         sh 'docker tag flask-calculator-img flask-calculator-img:latest'
-        // Run the new Docker image
+        // Run the new Docker Image
         sh 'docker container run --name flask-calculator-app -p 5000:5000 -d flask-calculator-img:latest'
       }
       post {

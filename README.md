@@ -23,7 +23,7 @@ What you will need:
 * This will launch a new window, with the AWS console
 
 ## Workshop
-### Step 1: Launch your preconfigured Docker Host
+### Step 1: Launch your pre-configured Docker Host
 * Log onto the AWS Console, go to Services > EC2
 * Select "Launch Instance"
 * Search for AMI id "ami-45c7593d", choose keypair called "devops-workshop" and security group called "devops-workshop"
@@ -46,7 +46,7 @@ docker container run \
    --name jenkins -d \
    maxsteel/jenkins-code:latest
 ```
-### Step 4: Cofigure Security
+### Step 4: Configure Security
 ### Step 5: Configure WebHooks
 * Create a GitHub Personal Access Token: 
   * Go to https://github.com/settings/tokens and 'Generate New Token'
@@ -55,17 +55,17 @@ docker container run \
   * Click "Generate Token", copy the token and keep it safe
 * On the Jenkins UI > Credentials
 * Under Domains, click "(global)"
-* Add Crendential:
+* Add Credential:
   * Kind: Username with Password
   * Scope: Global
-  * Username: <your GitHub username>
-  * Password: <PAToken generated above>
+  * Username: \<your GitHub username\>
+  * Password: \<PAToken generated above\>
   * ID: GITHUB_PATOKEN_USERPASS
   * Description: GITHUB_PATOKEN_USERPASS
-* Add a second Crendential:
+* Add a second Credential:
   * Kind: Secret Text
   * Scope: Global
-  * Secret: <PAToken generated above>
+  * Secret: \<PAToken generated above\>
   * ID: GITHUB_PATOKEN_SECRET
   * Description: GITHUB_PATOKEN_SECRET
 * Go to Jenkins > Manage Jenkins > Configure System

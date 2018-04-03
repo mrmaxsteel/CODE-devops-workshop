@@ -1,6 +1,8 @@
 flask-test-kata
 ===============
 
+CREDIT: https://github.com/plain-vanilla-games/flask-test-kata
+
 This is a python testing kata for a simple Flask web "service".
 
 This project has the following skeleton:
