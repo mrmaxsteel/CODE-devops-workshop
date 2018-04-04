@@ -7,25 +7,26 @@ This is a python testing kata for a simple Flask web "service".
 
 This project has the following skeleton:
 
-    flask-test-kata
-    ├── calculator
-    │   ├── __init__.py
-    │   ├── app.py
-    │   ├── logic.py
-    │   └── templates
-    │       └── index.html
-    ├── README.md
-    ├── requirements.txt
-    └── tests
+```
+app
+├── calculator
+│   ├── __init__.py
+│   ├── app.py
+│   ├── logic.py
+│   └── templates
+│       └── index.html
+├── README.md
+├── requirements.txt
+└── tests
+    ├── __init__.py
+    ├── base.py
+    ├── integration
+    |   ├── __init__.py
+    |   └── test_views.py
+    └── unit
         ├── __init__.py
-        ├── base.py
-        ├── integration
-        |   ├── __init__.py
-        |   └── test_views.py
-        └── unit
-            ├── __init__.py
-            └── test_logic.py
-
+        └── test_logic.py
+```
 The tasks at hand:
 
 Unit Tests

@@ -11,7 +11,7 @@
 * Click 'Review and Launch', and then 'Launch' 
 * Choose keypair called "devops-workshop" and then 'Launch Instances', taking note of the Public DNS Name of the instance
 
-### Step A.2: Connect to the instance using SSH
+### Step A.2: Connect to the Docker Host using SSH
 * Download the SSH key called devops-workshop.pem
 * From a Git Bash, SSH to instance with:
 ```
@@ -19,7 +19,7 @@ $ ssh ubuntu@<PUBLIC_DNS_NAME> -i /path/to/devops-workshop.pem
 ```
 
 ### Step A.3: Run a Jenkins CI container
-* Run following:
+* From an SSH terminal on the AWS Docker Host, run:
 ```
 $ docker container run \
    --mount type=volume,source=jenkins-data,destination="/var/jenkins_home",volume-driver=local \
