@@ -5,6 +5,6 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy flask app source code to the /app dir on the container
 WORKDIR /app/
 COPY app/ .
-# Set the Entrypoint to start the calculator app
+# Start the calculator app when you run this container
 CMD ["python", "calculator/app.py"]
 

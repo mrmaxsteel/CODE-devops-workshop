@@ -14,10 +14,8 @@ This project has the following skeleton:
     │   ├── logic.py
     │   └── templates
     │       └── index.html
-    ├── Makefile
     ├── README.md
     ├── requirements.txt
-    ├── setup.py
     └── tests
         ├── __init__.py
         ├── base.py
@@ -77,15 +75,4 @@ Integration Tests
 
 3. Make sure that for requests that attempt to divide by zero that the
    calculator app returns an appropriate 403 response.
-
-
-Setup
------
-
-In order to start simply clone the repo:
-
-    $ git clone git@github.com:plain-vanilla-games/flask-test-kata.git
-    $ cd flask-test-kata
-    $ make bootstrap
-    $ make test
 
