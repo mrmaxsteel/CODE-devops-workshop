@@ -2,7 +2,7 @@
 ## Summary
 This workshop will be a mixture of interactive learning and hands-on practical work, so come prepared to get your hands dirty! In this workshop we will:
 * Use Amazon Web Services (AWS) to launch and use compute resources in the Cloud
-* Run a Jenkins Continuous Integration (CI) server as a Docker container on an AWS instance
+* Run a Jenkins Continuous Integration (CI) server as a Docker container ([jenkins-code](https://github.com/mrmaxsteel/jenkins-code)) on an AWS instance
 * Set up a CI/CD pipeline for a GitHub repository, so you can have automated Build, Test and Deploy, each time you commit
 * Practise some TDD on a Python application, and see how it interacts with the CI system 
 
