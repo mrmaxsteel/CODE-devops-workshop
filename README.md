@@ -4,9 +4,9 @@ This workshop will be a mixture of interactive learning and hands-on practical w
 *	Run a Jenkins Continuous Integration (CI) server as a Docker container on an AWS instance
 *	Set up a CI/CD pipeline for a GitHub repository, so you can have automated Build, Test and Deploy, each time you commit!
 
-Hopefully, you will come away knowing more about public clouds and why they are being used more and more in industry. You will be introduced to containers, and learn a bit about why they are the hottest topic in tech at the moment. And you will have a better understanding of Continuous Integration/Continuous Deployment (CI/CD), and how it can really help accelerate time to market and improve software quality. 
+Hopefully, you will come away knowing more about public clouds and why they are being used more and more in industry. You will be introduced to containers (specifically docker), and learn a bit about why they are a hot topic in tech at the moment. And you will have a better understanding of Continuous Integration/Continuous Deployment (CI/CD), and how it can help accelerate time to market and improve software quality. 
 
-Finally, and perhaps most practically, you will leave knowing everything you need to know to easily set up your own end-to-end DevOps pipeline, so you can hit the ground running on your next software project! 
+Finally, and perhaps most practically, you shuold leave knowing everything you need to know to easily set up your own end-to-end DevOps pipeline, so you can hit the ground running on your next software project! 
 
 ## Pre-work
 What you will need:
@@ -121,14 +121,6 @@ From the Jenkins Web UI:
 * Do initial build on master
 * Make a code change on a new branch with TDD, submit a pull request, view build & test
 * Merge PR, view build, test & deploy
-
 ### AMI config
 * Install docker-ce
 * usermod -aG docker ubuntu
-
-### AWS IAM Profile permissions
-* Create Key Pair
-* Create Security Group
-* Create AMI
-* Create/launch/delete Instance
-* Create/launch/delete ELB
