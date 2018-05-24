@@ -7,7 +7,7 @@ class CalculatorTests(TestCase):
         c = Calculator()
 
         result = c.mul(22, 10)
-        assert(result, 2)
+        self.assertEqual(result, 2)
 
     def test_div(self):
         pass
