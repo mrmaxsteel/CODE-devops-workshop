@@ -18,17 +18,32 @@ pipeline {
       steps {
         sh """
           docker build \
-            -t img-${GIT_COMMIT} \
             --target unit-tests .
         """
+      }
+    }
+
+    stage ('Integration Tests') {
+      steps {
+        sh """
+          docker build \
+            --target integration-tests \
+            -t img-${GIT_COMMIT} .
+        """
+      }
+    }
+
+    stage ('Parse Test Results') {
+      steps {
         sh "docker run --name ctr-${GIT_COMMIT} img-${GIT_COMMIT}"
         sh "docker cp ctr-${GIT_COMMIT}:/app results"
       }
+    }
       post {
         // Parse the test results so they appear in BlueOcean UI
         always {
           sh "docker rm --force ctr-${GIT_COMMIT} || true"
-          junit '**/*_results.xml'
+          junit 'results/**/*_results.xml'
         }
       }
     }
