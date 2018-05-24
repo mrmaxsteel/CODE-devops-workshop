@@ -3,22 +3,46 @@ pipeline {
   agent { label 'master' }
 
   stages {
-
-    stage ('Run Unit & Integration Tests') {
-      // For this stage, tell Jenkins to build the agent form the dockerfile
-      agent { 
-        dockerfile true
-      }
+    stage ('Build') {
       steps {
-        // Run the Unit Tests
-        sh 'py.test app/tests/unit -v --junitprefix=linux --junitxml unit_results.xml || true'
-        // Run the Integration Tests
-        sh 'py.test app/tests/integration -v --junitprefix=linux --junitxml integration_results.xml || true'
+        sh """
+          docker build \
+            --pull \
+            --no-cache \
+            --target builder .
+        """
+      }
+    }
+
+    stage ('Unit Tests') {
+      steps {
+        sh """
+          docker build \
+            --target unit-tests .
+        """
+      }
+    }
+
+    stage ('Integration Tests') {
+      steps {
+        sh """
+          docker build \
+            --target integration-tests \
+            -t img-${GIT_COMMIT} .
+        """
+      }
+    }
+
+    stage ('Parse Test Results') {
+      steps {
+        sh "docker run --name ctr-${GIT_COMMIT} img-${GIT_COMMIT}"
+        sh "docker cp ctr-${GIT_COMMIT}:/app results"
       }
       post {
         // Parse the test results so they appear in BlueOcean UI
         always {
-          junit '**/*_results.xml'
+          sh "docker rm --force ctr-${GIT_COMMIT} || true"
+          junit 'results/**/*_results.xml'
         }
       }
     }
@@ -29,11 +53,11 @@ pipeline {
         // Only run the application when on 'master' branch
         branch 'master'
       }
-      steps {  
+      steps {
         // Remove any existing running containers
         sh 'docker container rm --force flask-calculator-app || true'
         // Re-build the Docker Image and tag it as 'latest'
-        sh 'docker build --rm -t flask-calculator-img .'
+        sh 'docker build --rm -t flask-calculator-img --target production .'
         sh 'docker tag flask-calculator-img flask-calculator-img:latest'
         // Run the new Docker Image
         sh 'docker container run --name flask-calculator-app -p 5000:5000 -d flask-calculator-img:latest'
