@@ -1,67 +1,46 @@
-# devops-workshop
-## Pre-work
-### What you will need
+# CODE DevOps Workshop: Clouds, Containers, CI/CD and You!
+## Summary
+This workshop will be a mixture of interactive learning and hands-on practical work, so come prepared to get your hands dirty! In this workshop we will:
+* Use Amazon Web Services (AWS) to launch and use compute resources in the Cloud
+* Run a Jenkins Continuous Integration (CI) server as a Docker container ([jenkins-code](https://github.com/mrmaxsteel/jenkins-code)) on an AWS instance
+* Set up a CI/CD pipeline for a GitHub repository, so you can have automated Build, Test and Deploy, each time you commit
+* Practise some TDD on a Python application, and see how it interacts with the CI system 
+
+Prior to the workshop, please complete the [Pre-Work](#pre-work)
+
+## Repository Contents
+This repository contains the following:
+```
+CODE-devops-workshop
+├── app
+│   └── ... # Source code for Python Flask app 
+├── doc
+│   ├── SECTION-A.md ─┐
+│   ├── SECTION-B.md  ├── # Contains workshop instructions
+│   └── SECTION-C.md ─┘
+├── Dockerfile # Source for the Docker container to be built
+├── Jenkinsfile # CI/CD Pipeline as Code
+└── README.md # This readme
+```
+
+## Pre-Work
+### You will need
+* A personal GitHub account
 * A laptop with:
    * Git installed (www.git-scm.com/downloads)
-   * A text editor of your choice
-   * An SSH client (Git Bash will do, or you can use putty)
-* An active AWS Educate account
+   * A text editor of your choice (e.g. [VS Code](https://code.visualstudio.com/))
+* An active AWS Educate account (see [Register your AWS Educate Account](#register-your-aws-educate-account))
+
+### Recommended Reading
+* Feel free to browse the code of the Python Flask application under the [app](app) directory. Check out the readme located at [app/README.md](app/README.md)
+* You can read about Jenkins here: https://jenkins.io/
+* You can read about Docker here: https://www.docker.com/what-docker
 
 ### Register your AWS Educate Account
 *Amazon Web Services (AWS) is a public cloud provider, that we will use to launch preconfigured instances for this workshop*
 * Visit https://www.awseducate.com/Registration and register your Student account.
-* Log in to AWS Educate account, click 'AWS Account' from the menu bar, click "Go to your AWS Educate starter account"
-* This will launch a new window, with the AWS console
+* Log in to AWS Educate account by visiting https://www.awseducate.com, and entering your credentials
 
-## Workshop
-### Step 1: Launch your preconfigured Docker Host
-* Log onto the AWS Console, go to Services > EC2
-* Select "Launch Instance"
-* Search for AMI id "<insert AMI ID here>", choose keypair called "devops-workshop" and security group called "devops-workshop"
-* Launch the instance, take note of the public DNS of the instance
-
-### Step 2: Connect to the instance using SSH
-* Download the SSH key called code.pem from the dropbox @ <dropbox_link_here>
-* From a Git Bash, SSH to instance with:
-```
-ssh ubuntu@<PUBLIC_DNS> -i /path/to/code.pem
-```
-
-### Step 3: Run a Jenkins CI container
-* Run following:
-```
-docker container run \
-   --mount type=volume,source=jenkins-max-data,destination="/var/jenkins_home",volume-driver=local \
-   -v /var/run/docker.sock:/var/run/docker.sock \
-   -p 8080:8080 \
-   --name jenkins-max -d \
-   maxsteel/jenkins-code:latest
-```
-
-## Other Stuff
-### Pseudocode
-* Introduce App
-* Show Dockerfile
-* Show Jenkinsfile
-    * Build
-    * Test
-    * Deploy (docker service update)
-* Start AMI in AWS with Docker installed
-* ssh to Instance and start jenkins service
-* Log into Jenkins UI
-* Add github repo
-* Do initial build on master
-* Make a code change on a new branch with TDD, submit a pull request, view build & test
-* Merge PR, view build, test & deploy
-
-### AMI config
-* Install docker-ce
-* set DOCKER_OPTS="--experimental=true" in /etc/default/docker
-* usermod -aG docker ubuntu
-
-### AWS IAM Profile permissions
-* Create Key Pair
-* Create Security Group
-* Create AMI
-* Create/launch/delete Instance
-* Create/launch/delete ELB
+To log into the AWS console:
+* Log into your AWS educate account, click 'AWS Account' from the menu bar, click "Go to your AWS Educate starter account"
+* This will launch a new window. Hit 'Start Lab' and 'Open Console'
