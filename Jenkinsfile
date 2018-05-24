@@ -18,7 +18,7 @@ pipeline {
       steps {
         sh """
           docker build \
-            -t img-${GIT_COMMIT}
+            -t img-${GIT_COMMIT} \
             --target unit-tests .
         """
         sh "docker run --name ctr-${GIT_COMMIT} img-${GIT_COMMIT}"
