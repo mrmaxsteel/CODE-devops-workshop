@@ -38,7 +38,6 @@ pipeline {
         sh "docker run --name ctr-${GIT_COMMIT} img-${GIT_COMMIT}"
         sh "docker cp ctr-${GIT_COMMIT}:/app results"
       }
-    }
       post {
         // Parse the test results so they appear in BlueOcean UI
         always {
