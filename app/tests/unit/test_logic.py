@@ -4,7 +4,10 @@ from calculator.logic import Calculator
 
 class CalculatorTests(TestCase):
     def test_mul(self):
-        pass
+        c = Calculator()
+
+        result = c.mul(22, 10)
+        assert(result, 220)
 
     def test_div(self):
         pass
