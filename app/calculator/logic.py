@@ -15,7 +15,7 @@ class Calculator(object):
         self.max_value = max_value
 
     def mul(self, a, b):
-        pass
+        return a * b
 
     def div(self, a, b):
         pass
