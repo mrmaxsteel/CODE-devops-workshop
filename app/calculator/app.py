@@ -9,7 +9,7 @@ app = Flask(__name__)
 @app.route("/calc/<a>*<b>")
 def multiply(a, b):
     c = Calculator()
-
+    test_string = "hello"
     result = c.mul(int(a), int(b))
     return str(result)
 
