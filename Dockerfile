@@ -1,8 +1,8 @@
 FROM python:2 AS builder
 # Install the required python packages 
 WORKDIR /app/
-COPY app/requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+COPY app/dev-requirements.txt .
+RUN pip install --no-cache-dir -r dev-requirements.txt
 # Copy flask app source code to the /app dir on the container
 COPY app/ .
 
@@ -18,6 +18,10 @@ RUN py.test ./tests/integration -v \
 
 FROM python:2-alpine AS production
 WORKDIR /app/
-COPY --from=builder /app .
+# Install only the production requirements, not dev packages
+COPY app/requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+# Copy flask app source code to the /app dir on the container
+COPY app/ .
 # Start the calculator app when you run this container
 CMD ["python", "calculator/app.py"]
