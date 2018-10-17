@@ -1,4 +1,4 @@
-# CODE DevOps Workshop: Clouds, Containers, CI/CD and You!
+# CODE DevOps Workshop: Clouds, Containers anbd CI/CD!
 ## Summary
 This workshop will be a mixture of interactive learning and hands-on practical work, so come prepared to get your hands dirty! In this workshop we will:
 * Use Amazon Web Services (AWS) to launch and use compute resources in the Cloud
