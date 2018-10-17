@@ -18,8 +18,9 @@ FROM unit-tester AS integration-tester
 RUN py.test ./tests/integration -v \
   --junitprefix=linux \
   --junitxml integration_results.xml || true
-
-FROM python:2-alpine AS production # Production image starts from slimmer alpine container
+  
+# Production image starts from the slimmer alpine container
+FROM python:2-alpine AS production 
 WORKDIR /app/
 # Copy flask app source code to the /app dir on the container
 COPY app/ .
