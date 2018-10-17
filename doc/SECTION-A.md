@@ -13,21 +13,24 @@
    * Custom TCP Rule - TCP - 5000 - Custom 0.0.0.0/0, ::/0 - Description: Web UI for Python App
 * Click 'Review and Launch', and then 'Launch' 
 * Select 'Create a new key pair', name it devops-code and then 'Download Key Pair' and copy to ~/.ssh/ec2_keys
-* Select 'Launch Instances', then click on the instance ID. From the Description pane, take not of the Public IP address
+* Select 'Launch Instances', then click on the instance ID. From the Description pane, take not of the Public DNS name
 
 ### Step A.2: Connect to the Docker Host using SSH
 * Download the SSH key called devops-workshop.pem
 * From a Git Bash (Windows) or terminal (Mac), SSH to instance with:
 ```
-$ ssh centos@<PUBLIC_IP_ADDRESS> -i /path/to/devops-code.pem
+$ ssh centos@<PUBLIC_DNS_NAME> -i /path/to/devops-code.pem
 ```
 (you may need to change permissions of your .pem key using `chmod 600 devops-code.pem`)
 
 ### Step A.3: Install Docker-CE
 * Follow https://docs.docker.com/install/linux/docker-ce/centos/#install-using-the-repository to install Docker CE, skipping the Optional step to enable edge and test repos.
-* Run the following command to allow the centos user to run docker commands with sudo:
+* Run the following commands to allow the centos user to run docker commands without sudo and jenkins to connect to the docker socket:
 ```
 $ sudo usermod -aG docker centos
+$ sudo useradd jenkins
+$ sudo usermod -aG docker jenkins
+$ sudo chmod 777 /var/run/docker.sock
 ```
 
 ### Step A.4: Run a Jenkins CI container
@@ -40,4 +43,4 @@ $ docker container run \
    --name jenkins -d \
    maxsteel/jenkins-code:latest
 ```
-* Test that Jenkins has started by visiting http://<PUBLIC_IP_ADDRESS>:8080/
+* Test that Jenkins has started by visiting http://<PUBLIC_DNS_NAME>:8080/
