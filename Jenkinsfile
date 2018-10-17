@@ -9,8 +9,7 @@ pipeline {
           docker build \
             --pull \
             --no-cache \
-            --target builder \
-            -f multistage.Dockerfile .
+            --target builder .
         """
       }
     }
@@ -20,15 +19,13 @@ pipeline {
         // Run the Unit Tests
         sh """
           docker build \
-            --target unit-tester \
-            -f multistage.Dockerfile .
+            --target unit-tester .
         """
         // Run the Integration Tests
         sh """
           docker build \
             --target integration-tester \
-            -t img-${GIT_COMMIT} \
-            -f multistage.Dockerfile .
+            -t img-${GIT_COMMIT} .
         """
       }
       post {
@@ -47,8 +44,7 @@ pipeline {
        sh """
         docker build \
           --target production \
-          -t flask-calculator-img:latest \
-          -f multistage.Dockerfile .
+          -t flask-calculator-img:latest .
        """
       }
     }
