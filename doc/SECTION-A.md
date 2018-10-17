@@ -1,24 +1,36 @@
 # Workshop
 ## Section A: Stand up a Dockerized Jenkins Master in AWS
-### Step A.1: Launch your pre-configured Docker Host
+### Step A.1: Launch a CentOS server
 * Log onto the AWS Console, go to Services > EC2
 * Select 'Launch Instance'
-* Under 'My AMIs', search for AMI id "ami-45c7593d" and select it
-* Choose t2.micro instance type, then 'Configure Instance Details'.
-* Accept the defaults for 'Configure Instance Details' and 'Add Storage'
-* Then, add a tag with Key="Name" and Value="devops-\<your-initials\>"
-* Check 'Select an existing security group', and choose "devops-workshop" (sg-feab4080) from the list, notice the 3 ports we have open
+* Under 'AWS Marketplace', search for 'centos' and select CentOS 7 (x86_64) - with Updates HVM
+* Choose t2.micro instance type (it should say "free tier eligible"), then 'Configure Instance Details'.
+* Accept the defaults for 'Configure Instance Details' and then 'Add Storage'
+* Accept the defaults for 'Add Storage' and then 'Add Tags'
+* Then, add a tag with Key="Name" and Value="devops-\<your-initials\>" and then 'Configure Security Groups'
+* Ensure SSH over port 22 configred, then select 'Add Rule' to add the following:
+   * Custom TCP Rule - TCP - 8080 - Custom 0.0.0.0/0, ::/0 - Description: Web UI for Jenkins
+   * Custom TCP Rule - TCP - 5000 - Custom 0.0.0.0/0, ::/0 - Description: Web UI for Python App
 * Click 'Review and Launch', and then 'Launch' 
-* Choose keypair called "devops-workshop" and then 'Launch Instances', taking note of the Public DNS Name of the instance
+* Select 'Create a new key pair', name it devops-code and then 'Download Key Pair' and copy to ~/.ssh/ec2_keys
+* Select 'Launch Instances', then click on the instance ID. From the Description pane, take not of the Public IP address
 
 ### Step A.2: Connect to the Docker Host using SSH
 * Download the SSH key called devops-workshop.pem
-* From a Git Bash, SSH to instance with:
+* From a Git Bash (Windows) or terminal (Mac), SSH to instance with:
 ```
-$ ssh ubuntu@<PUBLIC_DNS_NAME> -i /path/to/devops-workshop.pem
+$ ssh centos@<PUBLIC_IP_ADDRESS> -i /path/to/devops-code.pem
+```
+(you may need to change permissions of your .pem key using `chmod 600 devops-code.pem`)
+
+### Step A.3: Install Docker-CE
+* Follow https://docs.docker.com/install/linux/docker-ce/centos/#install-using-the-repository to install Docker CE, skipping the Optional step to enable edge and test repos.
+* Run the following command to allow the centos user to run docker commands with sudo:
+```
+$ sudo usermod -aG docker centos
 ```
 
-### Step A.3: Run a Jenkins CI container
+### Step A.4: Run a Jenkins CI container
 * From an SSH terminal on the AWS Docker Host, run:
 ```
 $ docker container run \
@@ -28,4 +40,4 @@ $ docker container run \
    --name jenkins -d \
    maxsteel/jenkins-code:latest
 ```
-* Test that Jenkins has started by visiting http://<PUBLIC_DNS_NAME>:8080/
+* Test that Jenkins has started by visiting http://<PUBLIC_IP_ADDRESS>:8080/
