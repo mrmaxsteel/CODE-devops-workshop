@@ -47,7 +47,8 @@ pipeline {
        sh """
         docker build \
           --target production \
-          -t flask-calculator-img:latest .
+          -t flask-calculator-img:latest \
+          -f multistage.Dockerfile .
        """
       }
     }
