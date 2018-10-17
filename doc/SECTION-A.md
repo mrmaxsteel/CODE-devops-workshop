@@ -8,7 +8,7 @@
 * Accept the defaults for 'Configure Instance Details' and then 'Add Storage'
 * Accept the defaults for 'Add Storage' and then 'Add Tags'
 * Then, add a tag with Key="Name" and Value="devops-\<your-initials\>" and then 'Configure Security Groups'
-* Ensure SSH over port 22 configred, then select 'Add Rule' to add the following:
+* Ensure a rule exists for SSH over port 22, then select 'Add Rule' to add the following:
    * Custom TCP Rule - TCP - 8080 - Custom 0.0.0.0/0, ::/0 - Description: Web UI for Jenkins
    * Custom TCP Rule - TCP - 5000 - Custom 0.0.0.0/0, ::/0 - Description: Web UI for Python App
 * Click 'Review and Launch', and then 'Launch' 
