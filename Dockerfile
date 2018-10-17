@@ -1,9 +1,9 @@
 FROM python:2 AS builder
 # Install the required python packages 
-COPY app/requirements.txt ./
+WORKDIR /app/
+COPY app/requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 # Copy flask app source code to the /app dir on the container
-WORKDIR /app/
 COPY app/ .
 
 FROM builder AS unit-tester
