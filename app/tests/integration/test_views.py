@@ -15,5 +15,5 @@ class ViewTests(TestCase):
         
     def test_multiply_invalid(self):
         r = self.client.get("/calc/1001*10")
-        self.assertEquals(r.status_code, 200)
+        self.assertEquals(r.status_code, 403)
         self.assertEquals(r.body, "Out of bounds min/max values used. Values should be >= -1000 and <= 1000")

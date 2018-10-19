@@ -14,7 +14,7 @@ def multiply(a, b):
         result = c.mul(int(a), int(b))
         return str(result)
     except Exception as e:
-        return str(e.args[0])
+        return str(e.args[0]), 403
 
 
 @app.route("/calc/<a>/<b>")
