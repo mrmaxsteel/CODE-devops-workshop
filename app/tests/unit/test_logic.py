@@ -27,5 +27,14 @@ class CalculatorTests(TestCase):
     def test_calculator_not_throw_e_when_in_bounds(self):
         Calculator(-10,10)
 
-    def test_div(self):
-        pass
+    def test_div_with_two_positive(self):
+        calculator = Calculator()
+        assert calculator.div(10,5) == 2
+
+    def test_div_with_two_negative(self):
+        calculator = Calculator()
+        assert calculator.div(-10,-5) == 2
+
+    def test_div_with_one_negative_one_positive(self):
+        calculator = Calculator()
+        assert calculator.div(-10,5) == -2
