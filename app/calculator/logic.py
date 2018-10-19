@@ -11,6 +11,8 @@ class ValueTooHighException(Exception):
 
 class Calculator(object):
     def __init__(self, min_value=-1000, max_value=1000):
+        if (min_value < -1000 or max_value > 1000):
+            raise Exception('Out of bounds min/max values used')
         self.min_value = min_value
         self.max_value = max_value
 

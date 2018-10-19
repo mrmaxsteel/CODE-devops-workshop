@@ -17,8 +17,8 @@ class CalculatorTests(TestCase):
         assert calculator.mul(-5,10) == -50
 
     def test_calculator_throws_e_when_out_of_bounds(self):
-        with pytest.raises(Exception) as e_info:
-            calculator = Calculator(-1001,100)
+        with pytest.raises(Exception):
+            Calculator(-1001,100)
 
     def test_div(self):
         pass
