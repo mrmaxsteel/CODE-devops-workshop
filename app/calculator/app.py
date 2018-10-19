@@ -10,8 +10,11 @@ app = Flask(__name__)
 def multiply(a, b):
     c = Calculator()
 
-    result = c.mul(int(a), int(b))
-    return str(result)
+    try:
+        result = c.mul(int(a), int(b))
+        return str(result)
+    except Exception as e:
+        return str(e.args[0])
 
 
 @app.route("/calc/<a>/<b>")
