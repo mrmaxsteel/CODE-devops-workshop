@@ -7,7 +7,7 @@ This workshop will be a mixture of interactive learning and hands-on practical w
 * Practise some TDD on a Python application, and see how it interacts with the CI system 
 
 Prior to the workshop, please complete the [Pre-Work](#pre-work)
-
+ 
 ## Repository Contents
 This repository contains the following:
 ```
