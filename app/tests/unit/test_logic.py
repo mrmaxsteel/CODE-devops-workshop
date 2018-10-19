@@ -38,3 +38,8 @@ class CalculatorTests(TestCase):
     def test_div_with_one_negative_one_positive(self):
         calculator = Calculator()
         assert calculator.div(-10,5) == -2
+
+    def test_div_by_zero_raises_e(self):
+        with pytest.raises(ZeroDivisionError):
+            calculator = Calculator()
+            calculator.div(10,0)
