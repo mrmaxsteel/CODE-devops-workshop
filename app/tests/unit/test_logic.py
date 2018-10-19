@@ -21,5 +21,10 @@ class CalculatorTests(TestCase):
             calculator = Calculator()
             calculator.mul(-1001,100)
 
+    def test_calculator_throws_e_when_out_of_bounds_high(self):
+        with pytest.raises(ValueError):
+            calculator = Calculator()
+            calculator.mul(-10,1001)
+
     def test_div(self):
         pass
