@@ -10,13 +10,24 @@ app = Flask(__name__)
 def multiply(a, b):
     c = Calculator()
 
-    result = c.mul(int(a), int(b))
-    return str(result)
+    try:
+        result = c.mul(int(a), int(b))
+        return str(result)
+    except Exception as e:
+        return str(e.args[0]), 403
 
 
 @app.route("/calc/<a>/<b>")
 def divide(a, b):
-    return "Unsupported operation", 501
+    c = Calculator()
+    
+    try:
+        result = c.div(int(a), int(b))
+        return str(result)
+    except ValueError as e:
+        return str(e.args[0]), 403
+    except ZeroDivisionError as e:
+        return 'Divide by Zero error.', 403
 
 
 @app.route("/")
