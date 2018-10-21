@@ -42,7 +42,7 @@ Unit Tests
 
 3. The constructor of `logic.Calculator` takes two arguments `min_value` and
    `max_value`. Change the class so that it's methods throw the exceptions
-   in `logic.py` when confronted with numbers that are too high or too low.
+   in `logic.py` when confronted with numbers that are too high or too low. N.B: https://stackoverflow.com/questions/23337471/how-to-properly-assert-that-an-exception-gets-raised-in-pytest
 
 4. Make sure to add tests to check the boundary of `min_value` and `max_value`.
 
